@@ -1,4 +1,0 @@
-<?php
-  import "db.php";
-  
-?>
