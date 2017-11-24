@@ -1,5 +1,5 @@
 <?php
-import "db/db.php";
+include "db/db.php";
 ?>
 
 <!DOCTYPE html>
