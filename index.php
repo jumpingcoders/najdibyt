@@ -90,7 +90,7 @@
          if (isset($message)) {
          	echo "$message";
          }
-         
+
          ?>
       <div class="wrapper">
       <div class="inner">
@@ -104,25 +104,27 @@
   $bytu=mysqli_num_rows($vysledek);
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
-      echo '<article>
-      <h3 class="major">'.$radek[2].'</h3>
-      <p>'.$radek[5].'</p>
-      <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
-      <p><b>Cena: </b>'.$radek[4].'Kč</p>
-      <p><b>Doplňující informace: </b>';
-      if ($radek == "Ne") {
-      	echo "Žádné";
-      }
-      else {
-	      if($radek[7]=="Ano"){echo "#Balkón ";}
-	      if($radek[8]=="Ano"){echo "#Bezbariérový ";}
-	      if($radek[9]=="Ano"){echo "#Parkování kousek od domu ";}
-	      if($radek[10]=="Ano"){echo "#Sklep ";}
-	      if($radek[11]=="Ano"){echo "#Terasa";}
-	  }
-      echo '</p>
-      <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
-      </article>';
+      if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
+        echo '<article>
+        <h3 class="major">'.$radek[2].'</h3>
+        <p>'.$radek[5].'</p>
+        <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
+        <p><b>Cena: </b>'.$radek[4].'Kč</p>
+        <p><b>Doplňující informace: </b>';
+        if ($radek == "Ne") {
+        	echo "Žádné";
+        }
+        else {
+  	      if($radek[7]=="Ano"){echo "#Balkón ";}
+  	      if($radek[8]=="Ano"){echo "#Bezbariérový ";}
+  	      if($radek[9]=="Ano"){echo "#Parkování kousek od domu ";}
+  	      if($radek[10]=="Ano"){echo "#Sklep ";}
+  	      if($radek[11]=="Ano"){echo "#Terasa";}
+  	  }
+        echo '</p>
+        <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
+        </article>';
+    }
   }
  ?>
       </section>
@@ -140,4 +142,3 @@
       <script src="js/api.js"></script>
    </body>
 </html>
-
