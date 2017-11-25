@@ -63,9 +63,9 @@
                         <h2 class="major">Cena, kterou chceš dát za byt (v korunách)</h2>
                         <input type="number" name="price" placeholder="Zadejte maximální cenu bytu"><br />
                      </div>
-                  </div>
+                  </div><input type="submit">
       </form></section>
-      <input type="submit">
+      
       </div>
       </div>
       </section>
