@@ -116,7 +116,7 @@
       if($radek[10]=="Ano"){echo "Sklep, ";}
       if($radek[11]=="Ano"){echo "Terasa.";}
       echo '</p>
-      <a href="'.$radek[1].'" class="special">'.$radek[1].'</a>
+      <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
       </article>';
   }
  ?>
