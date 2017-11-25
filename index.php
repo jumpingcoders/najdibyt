@@ -97,11 +97,11 @@
       <h2>Výsledky vyhledávání:</h2>
       <section class="features">
       <?php
-  header('content-type: text/html; charset=utf-8');
   $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
   mysqli_query($link,"SET NAMES utf8;");
   $vysledek=mysqli_query($link,"SELECT * FROM nabidky ORDER BY uzitna_plocha;");
   $bytu=mysqli_num_rows($vysledek);
+  $zsu=mysqli_query($link,"SELECT * FROM zsu ORDER BY nazev_ulice;");
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
       if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
@@ -125,6 +125,29 @@
         <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
         </article>';
     }
+      echo '<article>
+      <h3 class="major">'.$radek[2].'</h3>
+      <p>'.$radek[5].'</p>
+      <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
+      <p><b>Cena: </b>'.$radek[4].'Kč</p>
+      <p><b>Doplňující informace: </b>';
+      if ($radek != "") {
+      	echo "Žádné";
+      }
+      else {
+	      if($radek[7]=="Ano"){echo "#Balkón ";}
+	      if($radek[8]=="Ano"){echo "#Bezbariérový ";}
+	      if($radek[9]=="Ano"){echo "#Parkování kousek od domu ";}
+	      if($radek[10]=="Ano"){echo "#Sklep ";}
+	      if($radek[11]=="Ano"){echo "#Terasa";}
+	  }
+
+	 for ($i=0; $i < 60; $i++) {
+	 	echo "$zsu";
+	 }
+      echo '</p>
+      <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
+      </article>';
   }
  ?>
       </section>
