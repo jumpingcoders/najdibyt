@@ -1,6 +1,7 @@
 <?php
    include "db/db.php";
    include "api.php";
+   include "funkce.php";
    ?>
 <!DOCTYPE HTML>
 <html>
@@ -104,7 +105,7 @@
   $zsu=mysqli_query($link,"SELECT * FROM zsu ORDER BY nazev_ulice;");
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
-      if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
+      //if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
         echo '<article>
         <h3 class="major">'.$radek[2].'</h3>
         <p>'.$radek[5].'</p>
@@ -140,7 +141,7 @@
 	      if($radek[9]=="Ano"){echo "#Parkování kousek od domu ";}
 	      if($radek[10]=="Ano"){echo "#Sklep ";}
 	      if($radek[11]=="Ano"){echo "#Terasa";}
-	  }
+	  //}
 
 	 for ($i=0; $i < 60; $i++) {
 	 	echo "$zsu";
