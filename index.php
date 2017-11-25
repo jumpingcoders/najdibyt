@@ -1,6 +1,5 @@
 <?php
    include "db/db.php";
-   include "api.php";
    include "funkce.php";
    ?>
 <!DOCTYPE HTML>
@@ -73,12 +72,6 @@
       </section>
       <section id="four" class="wrapper alt style1">
       <div class="inner">
-      <?php
-         if (isset($message)) {
-         	echo "$message";
-         }
-
-         ?>
       <div class="wrapper">
       <div class="inner">
       <h2>Výsledky vyhledávání:</h2>
