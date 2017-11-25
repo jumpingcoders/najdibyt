@@ -101,7 +101,6 @@
   mysqli_query($link,"SET NAMES utf8;");
   $vysledek=mysqli_query($link,"SELECT * FROM nabidky ORDER BY uzitna_plocha;");
   $bytu=mysqli_num_rows($vysledek);
-  $zsu=mysqli_query($link,"SELECT * FROM zsu ORDER BY nazev_ulice;");
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
       if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
@@ -141,10 +140,6 @@
 	      if($radek[10]=="Ano"){echo "#Sklep ";}
 	      if($radek[11]=="Ano"){echo "#Terasa";}
 	  }
-
-	 for ($i=0; $i < 60; $i++) {
-	 	echo "$zsu";
-	 }
       echo '</p>
       <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
       </article>';
