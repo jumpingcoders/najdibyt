@@ -12,9 +12,9 @@
     global $apiKeyBing;
     $input=str_replace(" ","%20",$input);
     $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
-    $vysledek=mysqli_query($link,"SELECT Response FROM geocache WHERE Query = '$input';")
+    $vysledek=mysqli_query($link,"SELECT Response FROM geocache WHERE Query = '$input';");
     if(mysqli_num_rows($vysledek)>0){
-      $response=mysqli_fetch_array($vysledek)[0];
+      $output=mysqli_fetch_array($vysledek)[0];
     }else{
       $request="http://dev.virtualearth.net/REST/v1/Locations?q=$input&o=xml&key=$apiKeyBing";
       //echo $request;
@@ -31,7 +31,7 @@
 
   }
 
-  function vzdalenost($lat1,$lon1,$lat2,$lon2){
+  function llvzdalenost($lat1,$lon1,$lat2,$lon2){
         loguj("byla zavolana funkce vzdalenost($lat1,$lon1,$lat2,$lon2)",1,"Funkce");
 
         $R=6378;
@@ -50,7 +50,7 @@
     global $vahaVzdalenost;
     $latlon1=geocode($lokalita);
     $latlon2=geocode($desiredLokalita);
-    return vzdalenost($latlon1[0],$latlon1[1],$latlon2[0],$latlon2[1])*$vahaVzdalenost;
+    return llvzdalenost($latlon1[0],$latlon1[1],$latlon2[0],$latlon2[1])*$vahaVzdalenost;
   }
 
   function casDoPrace($lokalita, $prace){
