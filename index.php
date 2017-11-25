@@ -109,7 +109,7 @@
       <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
       <p><b>Cena: </b>'.$radek[4].'Kč</p>
       <p><b>Doplňující informace: </b>';
-      if ($radek == "Ne") {
+      if ($radek != "") {
       	echo "Žádné";
       }
       else {
