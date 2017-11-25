@@ -1,6 +1,5 @@
 <?php
    include "db/db.php";
-   include "api.php";
    include "funkce.php";
    ?>
 <!DOCTYPE HTML>
@@ -64,20 +63,6 @@
                         <input type="number" name="price" placeholder="Zadejte maximální cenu bytu"><br />
                      </div>
                   </div>
-               </section>
-               <section id="two" class="wrapper alt spotlight style2">
-                  <div class="inner">
-                     <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-                     <div class="content">
-                        <h2 class="major">Preferovaná skupina v okolí</h2>
-                        <select name="ageGroup">
-                           <option value="1">8-18</option>
-                           <option value="2">19-25</option>
-                           <option value="3">26-35</option>
-                           <option value="4">36-55</option>
-                           <option value="5">56+</option>
-                        </select>
-                        <br />
       </form>
       <input type="submit">
       </div>
@@ -85,12 +70,6 @@
       </section>
       <section id="four" class="wrapper alt style1">
       <div class="inner">
-      <?php
-         if (isset($message)) {
-         	echo "$message";
-         }
-
-         ?>
       <div class="wrapper">
       <div class="inner">
       <h2>Výsledky vyhledávání:</h2>
