@@ -85,7 +85,6 @@
   $bytu=mysqli_num_rows($vysledek);
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
-      if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
         echo '<article>
         <h3 class="major">'.$radek[2].'</h3>
         <p>'.$radek[5].'</p>
@@ -126,7 +125,6 @@
       echo '</p>
       <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
       </article>';
-  }
  ?>
       </section>
       </div>
