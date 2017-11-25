@@ -2,7 +2,7 @@
 
   $vahaVzdalenost=100;
   $vahaCas=200;
-  $vahaVek=50;
+  $vahaVek=100;
   $vahaVelikost=100;
   $vahaCena=0.1;
 
@@ -24,17 +24,31 @@
 
     $response = new SimpleXMLElement($output);
 
-    $latlon[0] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Latitude;
-    $latlon[1] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Longitude;
+    $latlon[0]=$response->ResourceSets->ResourceSet->Resources->Location->Point->Latitude;
+    $latlon[1]=$response->ResourceSets->ResourceSet->Resources->Location->Point->Longitude;
+    if($response->StatusCode!=200){
+      $latlon[0]=0;
+      $latlon[1]=0;
+    }
 
     return $latlon;
 
   }
 
-  function llvzdalenost($lat1,$lon1,$lat2,$lon2){
-        loguj("byla zavolana funkce vzdalenost($lat1,$lon1,$lat2,$lon2)",1,"Funkce");
+  function getXml($location){
+    $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
+    $location=str_replace(" ","%20",$location);
+    $vysledek=mysqli_query($link,"SELECT Response FROM geocache WHERE Query = '$location';");
+    return mysqli_fetch_array($vysledek)[0];
+  }
 
+  function llvzdalenost($latlon1,$latlon2){
         $R=6378;
+
+        $lat1=$latlon1[0];
+        $lon1=$latlon1[1];
+        $lat2=$latlon2[0];
+        $lon2=$latlon2[1];
         $lat2=deg2rad($lat2);
         $lat1=deg2rad($lat1);
         $dLat=deg2rad($lat1-$lat2);
@@ -44,13 +58,14 @@
         //return rand(1,100);
         $vzdalenost=$R*$c;
         return $vzdalenost;
+        //return 10;
     }
 
   function vzdalenost($lokalita, $desiredLokalita){
     global $vahaVzdalenost;
     $latlon1=geocode($lokalita);
     $latlon2=geocode($desiredLokalita);
-    return llvzdalenost($latlon1[0],$latlon1[1],$latlon2[0],$latlon2[1])*$vahaVzdalenost;
+    return llvzdalenost($latlon1,$latlon2)*$vahaVzdalenost;
   }
 
   function casDoPrace($lokalita, $prace){
