@@ -71,7 +71,7 @@
                      </div>
                   </div><input type="submit">
       </form></section>
-      
+
       </div>
       </div>
       </section>
@@ -85,10 +85,17 @@
   $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
   mysqli_query($link,"SET NAMES utf8;");
   $uzitna_plocha=0;
+  $maxCena=1000000000;
   if(isset($_POST["size"])){
     $uzitna_plocha=$_POST["size"];
   }
-  $vysledek=mysqli_query($link,"SELECT * FROM nabidky WHERE uzitna_plocha >= $uzitna_plocha ORDER BY uzitna_plocha;");
+  if(isset($_POST["price"])){
+    if($_POST["price"]!=""){
+      $maxCena=$_POST["price"];
+    }
+  }
+
+  $vysledek=mysqli_query($link,"SELECT * FROM nabidky WHERE uzitna_plocha >= $uzitna_plocha AND price<=$maxCena ORDER BY ABS(uzitna_plocha-$uzitna_plocha);");
   $bytu=mysqli_num_rows($vysledek);
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
