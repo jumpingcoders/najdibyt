@@ -10,25 +10,47 @@
 
   function geocode($input){
     global $apiKeyBing;
-
     $input=str_replace(" ","%20",$input);
-    $request="http://dev.virtualearth.net/REST/v1/Locations?q=$input&o=xml&key=$apiKeyBing";
-    //echo $request;
-    $output=file_get_contents($request);
-    //echo $vysledek;
+    $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
+    $vysledek=mysqli_query($link,"SELECT Response FROM geocache WHERE Query = '$input';")
+    if(mysqli_num_rows($vysledek)>0){
+      $response=mysqli_fetch_array($vysledek)[0];
+    }else{
+      $request="http://dev.virtualearth.net/REST/v1/Locations?q=$input&o=xml&key=$apiKeyBing";
+      //echo $request;
+      $output=file_get_contents($request);
+      mysqli_query($link,"INSERT INTO geocache VALUES('$input','$output');");
+    }
+
     $response = new SimpleXMLElement($output);
 
-// Extract data (e.g. latitude and longitude) from the results
-  $latlon[0] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Latitude;
-  $latlon[1] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Longitude;
+    $latlon[0] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Latitude;
+    $latlon[1] =$response->ResourceSets->ResourceSet->Resources->Location->Point->Longitude;
 
     return $latlon;
 
   }
 
-  function vzdalenost($lokalita, $desiredLokalita){
+  function vzdalenost($lat1,$lon1,$lat2,$lon2){
+        loguj("byla zavolana funkce vzdalenost($lat1,$lon1,$lat2,$lon2)",1,"Funkce");
 
-    return 10;
+        $R=6378;
+        $lat2=deg2rad($lat2);
+        $lat1=deg2rad($lat1);
+        $dLat=deg2rad($lat1-$lat2);
+        $dLon=deg2rad($lon1-$lon2);
+        $a=sin($dLat/2)*sin($dLat/2)+sin($dLon/2)*sin($dLon/2)*cos($lat1)*cos($lat2);
+        $c=2*atan2(sqrt($a),sqrt(1-$a));
+        //return rand(1,100);
+        $vzdalenost=$R*$c;
+        return $vzdalenost;
+    }
+
+  function vzdalenost($lokalita, $desiredLokalita){
+    global $vahaVzdalenost;
+    $latlon1=geocode($lokalita);
+    $latlon2=geocode($desiredLokalita);
+    return vzdalenost($latlon1[0],$latlon1[1],$latlon2[0],$latlon2[1])*$vahaVzdalenost;
   }
 
   function casDoPrace($lokalita, $prace){
