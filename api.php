@@ -8,7 +8,7 @@ if (isset($_POST['ageGroup'])) {
 	$timeWork = $_POST['timeWork'];
 	$price = $_POST['price'];
 
-	$opts = [
+	/*$opts = [
     "http" => [
         "method" => "GET",
         "header" => "Accept-language: en\r\n" .
