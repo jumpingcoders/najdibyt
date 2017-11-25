@@ -107,8 +107,8 @@
       echo '<article>
       <h3 class="major">'.$radek[2].'</h3>
       <p>'.$radek[5].'</p>
-      <p>'.$radek[3].'</p>
-      <p>'.$radek[4].'Kč</p>
+      <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
+      <p><b>Cena: </b>'.$radek[4].'Kč</p>
       <p>';
       if($radek[7]=="Ano"){echo "Balkón, ";}
       if($radek[8]=="Ano"){echo "Bezbariérový, ";}
