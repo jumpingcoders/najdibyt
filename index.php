@@ -97,7 +97,6 @@
       <h2>Výsledky vyhledávání:</h2>
       <section class="features">
       <?php
-  header('content-type: text/html; charset=utf-8');
   $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
   mysqli_query($link,"SET NAMES utf8;");
   $vysledek=mysqli_query($link,"SELECT * FROM nabidky ORDER BY uzitna_plocha;");
