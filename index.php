@@ -100,7 +100,11 @@
       <?php
   $link=mysqli_connect("wm138.wedos.net", "w155086_findbyt", "WQgtnvB3", "d155086_findbyt");
   mysqli_query($link,"SET NAMES utf8;");
-  $vysledek=mysqli_query($link,"SELECT * FROM nabidky ORDER BY uzitna_plocha;");
+  $uzitna_plocha=0;
+  if(isset($_POST["size"])){
+    $uzitna_plocha=$_POST["size"];
+  }
+  $vysledek=mysqli_query($link,"SELECT * FROM nabidky WHERE uzitna_plocha >= $uzitna_plocha ORDER BY uzitna_plocha;");
   $bytu=mysqli_num_rows($vysledek);
   $zsu=mysqli_query($link,"SELECT * FROM zsu ORDER BY nazev_ulice;");
   for($x=0; $x<50; $x++){
