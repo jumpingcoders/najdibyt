@@ -22,6 +22,4 @@ if (isset($_POST['ageGroup'])) {
 	// Open the file using the HTTP headers set above
 	$file = file_get_contents('https://developer.o2.cz/sociodemo/api/age/127752?ageGroup=' . $ageGroup . '&occurenceType=1&hour=10', false, $context);
 	$json = json_decode($file, true);
-
-	$message = "Tvému výběru odpovídá" . $bytu . " bytů, počet lidí tebou zadané věkové kategorie v okolí je " . $json['count'] . ", nejlevnější byt v oblasti je za" . $lowPrice . "Kč";
 }

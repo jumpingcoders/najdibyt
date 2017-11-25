@@ -1,6 +1,7 @@
 <?php
    include "db/db.php";
    include "funkce.php";
+   include "api.php";
    ?>
 <!DOCTYPE HTML>
 <html>
@@ -63,7 +64,7 @@
                         <input type="number" name="price" placeholder="Zadejte maximální cenu bytu"><br />
                      </div>
                   </div>
-      </form>
+      </form></section>
       <input type="submit">
       </div>
       </div>
