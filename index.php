@@ -42,9 +42,7 @@
                      <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
                      <div class="content">
                         <h2 class="major">V jaké oblasti by jste rád bydlel/a?</h2>
-                        <select name="localite">
-                           <option value="prague">Praha</option>
-                        </select>
+                        <input name="localite" />
                         <br />
                      </div>
                   </div>
@@ -108,12 +106,13 @@
   $bytu=mysqli_num_rows($vysledek);
   for($x=0; $x<50; $x++){
       $radek=mysqli_fetch_array($vysledek);
-      //if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
+      if(llvzdalenost(geocode($radek[3]),geocode($_POST["localite"]))<20){
         echo '<article>
         <h3 class="major">'.$radek[2].'</h3>
         <p>'.$radek[5].'</p>
         <p><b>Adresa/oblast bytu: </b>'.$radek[3].'</p>
         <p><b>Cena: </b>'.$radek[4].'Kč</p>
+        <p><b>Užitná plocha: </b>'.$radek[12].'M<sup>2</sup></p>
         <p><b>Doplňující informace: </b>';
         if ($radek == "Ne") {
         	echo "Žádné";
@@ -144,11 +143,7 @@
 	      if($radek[9]=="Ano"){echo "#Parkování kousek od domu ";}
 	      if($radek[10]=="Ano"){echo "#Sklep ";}
 	      if($radek[11]=="Ano"){echo "#Terasa";}
-	  //}
-
-	 for ($i=0; $i < 60; $i++) {
-	 	echo "$zsu";
-	 }
+	  }
       echo '</p>
       <a href="'.$radek[1].'" class="special">Odkaz na nabídku</a>
       </article>';
