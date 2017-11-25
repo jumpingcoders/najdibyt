@@ -42,7 +42,13 @@
                      <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
                      <div class="content">
                         <h2 class="major">V jaké oblasti by jste rád bydlel/a?</h2>
-                        <input name="localite" />
+                        <select name="localite" >
+                          <option>Smíchov</option>
+                          <option>Letná</option>
+                          <option>Karlín</option>
+                          <option>Vinohrady</option>
+                          <option>Petřiny</option>
+                        </select>
                         <br />
                      </div>
                   </div>
